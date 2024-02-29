@@ -100,10 +100,10 @@ int deletar() // criação da função de deletar usuarios
 
     remove(cpf); // delete o cpf do banco de dados
 
-    FILE *file; // sistema acesse o arquivo FILE do pc e execute o comando file
+    FILE *file;             // sistema acesse o arquivo FILE do pc e execute o comando file
     file = fopen(cpf, "r"); // comando file manda abrir o arquivo ja criado e lê-lo (r de read)
 
-    if(file == NULL) // se o arquivo não for encontrado, ou seja, for nulo, faça o que esta abaixo
+    if (file == NULL) // se o arquivo não for encontrado, ou seja, for nulo, faça o que esta abaixo
     {
         printf("O CPF não foi cadastrado. \n");
         system("pause");
@@ -121,42 +121,57 @@ int main()
 {                  // início do int main
     int opcao = 0; // definindo variavel opcao
     int laco = 1;  // definindo variavel laco
+    char senhadigitada[10] = "a"; // definindo senhadigitada laco
+    int comparacao; // definindo variavel comparacao
 
-    for (laco = 1; laco = 1;) // início do laço de repetição for
-    {
-        system("cls");
+    printf("##### Cartório EBAC #####\n\n");
+    printf("Login de administrador!\n\n Digite  sua senha: ");
+    scanf("%s", senhadigitada);
 
-        setlocale(LC_ALL, "Portuguese_Brasil.1252"); // definindo a linguagem
+    comparacao = strcmp(senhadigitada, "admin"); // definindo por meio do strcpm (compraração de strings) que a variável senhadigitada é igual a string  admin, quando isso ocorre, na variavel comparaçã sera salva o valor 0
 
-        printf("##### Cartório da EBAC #####\n\n"); // início do menu
-        printf("Escolha a opção desejada:\n\n");
-        printf("\t1 - Registrar nomes\n");
-        printf("\t2 - Consultar nomes\n");
-        printf("\t3 - Deletar nomes\n\n"); // fim do menu
-        printf("Opção: ");
-
-        scanf("%i", &opcao); // armazenando a escolha do usuário
-
-        system("cls"); // apagando o menu
-
-        switch (opcao) // início do laço de repetição switch
+    if(comparacao == 0) // por causa do strcpm acima, quando eu digitar admin, a senha estara coreta e comparacao salvara o valor zero, por isso nesse if se comparacao for igual a zer, fazer o que está abaixo
+    { // início do if
+        system("cls"); // apaga o menu acima
+        
+        for(laco = 1; laco = 1;) // início do laço de repetição for
         {
-        case 1:
-            registro();
-            break;
+            system("cls");
 
-        case 2:
-            consulta();
-            break;
+            setlocale(LC_ALL, "Portuguese_Brasil.1252"); // definindo a linguagem
 
-        case 3:
-            deletar();
-            break;
+            printf("##### Cartório da EBAC #####\n\n"); // início do menu
+            printf("Escolha a opção desejada:\n\n");
+            printf("\t1 - Registrar nomes\n");
+            printf("\t2 - Consultar nomes\n");
+            printf("\t3 - Deletar nomes\n\n"); // fim do menu
+            printf("Opção: ");
 
-        default:
-            printf("Essa opção não esta disponivel\n");
-            system("pause");
-            break;
-        } // fim do laço de repetição switch
-    }     // fim do laço de repetição for
+            scanf("%i", &opcao); // armazenando a escolha do usuário
+
+            system("cls"); // apagando o menu
+
+            switch (opcao) // início do laço de repetição switch
+            {
+            case 1:
+                registro();
+                break;
+
+            case 2:
+                consulta();
+                break;
+
+            case 3:
+                deletar();
+                break;
+
+            default:
+                printf("Essa opção não esta disponivel\n");
+                system("pause");
+                break;
+            } // fim do laço de repetição switch
+        }     // fim do laço de repetição for
+    } // fim do if
+    else   
+        printf("Senha Incorreta!");
 } // fim do int main
